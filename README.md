@@ -1,6 +1,8 @@
 Phperiod
 ========
 
+[![Build Status](https://travis-ci.org/maidmaid/phperiod.svg?branch=master)](https://travis-ci.org/maidmaid/phperiod)
+
 Showing translated and ranged DateTime in PHP.
 
 Usage
