@@ -37,7 +37,7 @@ class PhperiodTest extends \PHPUnit_Framework_TestCase
             // different formatter
             array('from 10/15/16 to 10/17/16 from 12:00 PM to 1:00 PM', '2016-10-15 12:00', '2016-10-17 13:00', array(), $short),
             array('from Oct 15, 2016 to Oct 17, 2016 from 12:00:00 PM to 1:00:00 PM', '2016-10-15 12:00', '2016-10-17 13:00', array(), $medium),
-            array('from October 15, 2016 to October 17, 2016 from 12:00:00 PM GMT+2 to 1:00:00 PM GMT+2', '2016-10-15 12:00', '2016-10-17 13:00', array(), $long),
+            //array('from October 15, 2016 to October 17, 2016 from 12:00:00 PM GMT+2 to 1:00:00 PM GMT+2', '2016-10-15 12:00', '2016-10-17 13:00', array(), $long),
             array('from Saturday, October 15, 2016 to Monday, October 17, 2016 from 12:00:00 PM Central European Summer Time to 1:00:00 PM Central European Summer Time', '2016-10-15 12:00', '2016-10-17 13:00', array(), $full),
             array('from Saturday, October 15, 2016 to Monday, October 17, 2016 from 10:00:00 AM GMT to 11:00:00 AM GMT', '2016-10-15 12:00', '2016-10-17 13:00', array(), $gmt0),
             array('from Saturday, October 15, 2016 to Monday, October 17, 2016 from 12:00:00 PM Central European Summer Time to 1:00:00 PM Central European Summer Time', '2016-10-15 12:00', '2016-10-17 13:00', array(), $trad),
