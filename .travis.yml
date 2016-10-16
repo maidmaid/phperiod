@@ -18,12 +18,16 @@ env:
 
 sudo: false
 
+before_install: echo "extension = intl.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
 install:
   - if [[ $setup = 'basic' ]]; then travis_retry composer install --no-interaction --prefer-dist; fi
   - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable; fi
   - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable; fi
 
-script: vendor/bin/phpunit --verbose --coverage-text --coverage-clover=coverage.xml
+before_script: echo 'date.timezone = "Europe/Zurich"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+
+script: vendor/bin/phpunit --verbose --coverage-text
 
 matrix:
   include:

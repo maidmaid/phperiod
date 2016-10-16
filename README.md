@@ -56,7 +56,7 @@ echo Phperiod::period(
     array('Mon', 'Thu', 'Sat'),
     new \IntlDateFormatter('fr')
 );
-// Monday, Thursday and Saturday from 12:00 PM to 1:00 PM, from Saturday, October 15, 2016 to Saturday, October 29, 2016
+// lundi, jeudi et samedi de 12:00 à 13:00, du samedi 15 octobre 2016 au samedi 29 octobre 2016
 ```
 
 With custom format:
