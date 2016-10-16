@@ -19,17 +19,25 @@ class Phperiod
     /**
      * Format period.
      *
-     * @param Datetime|null $start
-     * @param Datetime|null $end
+     * @param DateTime|string|null $start
+     * @param DateTime|string|null $end
      * @param array $daysOfWeek
      * @param IntlDateFormatter|null $formatter
      * @return string
      * @throws FormatException
      */
-    public static function period(DateTime $start = null, DateTime $end = null, $daysOfWeek = array(), IntlDateFormatter $formatter = null)
+    public static function period($start = null, $end = null, $daysOfWeek = array(), IntlDateFormatter $formatter = null)
     {
-        $start = $start ?: new DateTime();
-        $end = $end ?: clone $start;
+        $start = $start instanceof DateTime
+            ? $start
+            : new DateTime(is_string($start) ? $start : 'now')
+        ;
+        $end = $end instanceof DateTime
+            ? $end
+            : (is_string($end)
+                ? new DateTime($end)
+                : clone $start)
+        ;
         static::$formatter = $formatter ?: new IntlDateFormatter(null, IntlDateFormatter::FULL, IntlDateFormatter::SHORT);
 
         static::setLocale(static::$formatter->getLocale());

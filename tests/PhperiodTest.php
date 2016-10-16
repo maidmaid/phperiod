@@ -16,9 +16,6 @@ class PhperiodTest extends \PHPUnit_Framework_TestCase
      */
     public function testPeriod($expected, $start, $end, $daysOfWeek, $formatter)
     {
-        $start = $start ? new \DateTime($start) : null;
-        $end = $end ? new \DateTime($end) : null;
-
         $this->assertEquals($expected, Phperiod::period($start, $end, $daysOfWeek, $formatter));
     }
 
@@ -76,9 +73,6 @@ class PhperiodTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidPeriod($start, $end, $daysOfWeek)
     {
-        $start = $start ? new \DateTime($start) : null;
-        $end = $end ? new \DateTime($end) : null;
-
         Phperiod::period($start, $end, $daysOfWeek);
     }
 
