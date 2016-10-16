@@ -1,12 +1,22 @@
 Phperiod
 ========
 
-[![Build Status](https://travis-ci.org/maidmaid/phperiod.svg?branch=master)](https://travis-ci.org/maidmaid/phperiod)
+[![Build Status](https://travis-ci.org/maidmaid/phperiod.svg?branch=master)](https://travis-ci.org/maidmaid/phperiod)   
 
-Showing translated and ranged DateTime in PHP.
+Showing translated and ranged DateTime in PHP. 
 
-Usage
------
+Require PHP >= 5.6 with Intl extension.
+
+## Installation
+
+Use [Composer](http://getcomposer.org/) to install Phperiod in your project:
+
+```shell
+composer require "maidmaid/phperiod"
+```
+
+
+## Usage
 
 Same day:
 
@@ -71,7 +81,6 @@ echo Phperiod::period(
 // Monday, Thursday and Saturday from 12:00 PM to 1:00 PM, from 10/15/16 to 10/29/16
 ```
 
-License
--------
+## License
 
 Phperiod is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
