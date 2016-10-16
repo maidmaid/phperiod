@@ -3,9 +3,8 @@
 namespace Maidmaid\Phperiod\Test;
 
 use Maidmaid\Phperiod\Phperiod;
-use PHPUnit\Framework\TestCase;
 
-class PhperiodTest extends TestCase
+class PhperiodTest extends \PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
