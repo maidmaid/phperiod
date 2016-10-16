@@ -19,11 +19,13 @@ class Phperiod
     /**
      * Format period.
      *
-     * @param DateTime|string|null $start
-     * @param DateTime|string|null $end
-     * @param array $daysOfWeek
+     * @param DateTime|string|null   $start
+     * @param DateTime|string|null   $end
+     * @param array                  $daysOfWeek
      * @param IntlDateFormatter|null $formatter
+     *
      * @return string
+     *
      * @throws FormatException
      */
     public static function period($start = null, $end = null, $daysOfWeek = array(), IntlDateFormatter $formatter = null)
@@ -147,7 +149,7 @@ class Phperiod
         return static::format($time, static::$formatter->getLocale(), IntlDateFormatter::NONE, static::$formatter->getTimeType());
     }
 
-    static protected function formatDayOfWeek($dayOfWeek)
+    protected static function formatDayOfWeek($dayOfWeek)
     {
         return static::format(new DateTime($dayOfWeek), static::translator()->getLocale(), null, null, null, null, 'EEEE');
     }
@@ -176,7 +178,7 @@ class Phperiod
 
     protected static function formatDaysOfWeek($daysOfWeek)
     {
-        $daysOfWeek = array_map(function($dayOfWeek) {
+        $daysOfWeek = array_map(function ($dayOfWeek) {
             return static::formatDayOfWeek($dayOfWeek);
         }, $daysOfWeek);
 

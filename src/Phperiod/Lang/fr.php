@@ -7,11 +7,11 @@ return array(
     'date' => array(
         'at' => 'le',
         'from' => 'du',
-        'to' => 'au'
+        'to' => 'au',
     ),
     'time' => array(
         'at' => 'à',
         'from' => 'de',
-        'to' => 'à'
+        'to' => 'à',
     ),
 );
