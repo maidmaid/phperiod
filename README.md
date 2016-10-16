@@ -50,7 +50,12 @@ echo Phperiod::period('2016-10-15 12:00', '2016-10-29 13:00', ['Mon', 'Thu', 'Sa
 Translated dates:
 
 ```php
-echo Phperiod::period('2016-10-15 12:00', '2016-10-29 13:00', ['Mon', 'Thu', 'Sat'], new \IntlDateFormatter('fr'));
+echo Phperiod::period(
+    '2016-10-15 12:00',
+    '2016-10-29 13:00',
+    ['Mon', 'Thu', 'Sat'],
+    new \IntlDateFormatter('fr')
+);
 // lundi, jeudi et samedi de 12:00 à 13:00, du samedi 15 octobre 2016 au samedi 29 octobre 2016
 ```
 
