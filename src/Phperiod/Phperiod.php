@@ -58,7 +58,8 @@ class Phperiod
                 return static::formatDate($start);
 
             // Example: Saturday, October 15, 2016 at 12:00 PM
-            case $o['=d'] && $o['=h'] && !$o['s=00:00'] && !$o['e=00:00'] && !$o['dow']:
+            case $o['=d'] && $o['=h'] && !$o['s=00:00'] && !$o['e=00:00'] && !$o['dow'] ||
+                 $o['=d'] && !$o['=h'] && !$o['s=00:00'] && $o['e=00:00'] && !$o['dow']:    // s=2016-10-15 12:00, e=2016-10-15 00:00
                 return static::formatDateTime($start);
 
             // Example: Saturday, October 15, 2016 from 12:00 AM to 1:00 PM
@@ -70,7 +71,8 @@ class Phperiod
                 return static::formatRangedDate($start, $end);
 
             // Example: from Saturday, October 15, 2016 to Monday, October 17, 2016 at 12:00 PM
-            case !$o['=d'] && !$o['=h'] && !$o['s=00:00'] && $o['e=00:00'] && !$o['dow']:
+            case !$o['=d'] && !$o['=h'] && !$o['s=00:00'] && $o['e=00:00'] && !$o['dow'] ||
+                 !$o['=d'] && $o['=h'] && !$o['s=00:00'] && !$o['e=00:00'] && !$o['dow']:   // s=2016-10-15 12:00, e=2016-10-17 12:00
                 return static::formatRangedDateTime($start, $end);
 
             // Example: from Saturday, October 15, 2016 to Monday, October 17, 2016 from 12:00 PM to 1:00 PM
