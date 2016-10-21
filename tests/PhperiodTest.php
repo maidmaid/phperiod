@@ -29,6 +29,7 @@ class PhperiodTest extends \PHPUnit_Framework_TestCase
         $trad = new \IntlDateFormatter('en', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, null, \IntlDateFormatter::TRADITIONAL);
         $en = new \IntlDateFormatter('en', \IntlDateFormatter::FULL, \IntlDateFormatter::SHORT);
         $fr = new \IntlDateFormatter('fr', \IntlDateFormatter::FULL, \IntlDateFormatter::SHORT);
+        $de = new \IntlDateFormatter('de', \IntlDateFormatter::FULL, \IntlDateFormatter::SHORT);
 
         return array(
             // different formatter
@@ -70,6 +71,22 @@ class PhperiodTest extends \PHPUnit_Framework_TestCase
             array('lundi, jeudi et samedi, du samedi 15 octobre 2016 au samedi 29 octobre 2016', '2016-10-15 00:00', '2016-10-29 00:00', array('Mon', 'Thu', 'Sat'), $fr),
             array('lundi, jeudi et samedi à 12:00, du samedi 15 octobre 2016 au samedi 29 octobre 2016', '2016-10-15 12:00', '2016-10-29 00:00', array('Mon', 'Thu', 'Sat'), $fr),
             array('lundi, jeudi et samedi de 12:00 à 13:00, du samedi 15 octobre 2016 au samedi 29 octobre 2016', '2016-10-15 12:00', '2016-10-29 13:00', array('Mon', 'Thu', 'Sat'), $fr),
+
+            // DE
+            array('Samstag, 15. Oktober 2016', '2016-10-15 00:00', null, array(), $de),
+            array('Samstag, 15. Oktober 2016', '2016-10-15 00:00', '2016-10-15 00:00', array(), $de),
+            array('Samstag, 15. Oktober 2016 um 12:00', '2016-10-15 12:00', null, array(), $de),
+            array('Samstag, 15. Oktober 2016 um 12:00', '2016-10-15 12:00', '2016-10-15 12:00', array(), $de),
+            array('Samstag, 15. Oktober 2016 um 12:00', '2016-10-15 12:00', '2016-10-15 00:00', array(), $de),
+            array('Samstag, 15. Oktober 2016 von 00:00 bis 13:00', '2016-10-15 00:00', '2016-10-15 13:00', array(), $de),
+            array('Samstag, 15. Oktober 2016 von 12:00 bis 13:00', '2016-10-15 12:00', '2016-10-15 13:00', array(), $de),
+            array('von Samstag, 15. Oktober 2016 bis Montag, 17. Oktober 2016', '2016-10-15 00:00', '2016-10-17 00:00', array(), $de),
+            array('von Samstag, 15. Oktober 2016 bis Montag, 17. Oktober 2016 um 12:00', '2016-10-15 12:00', '2016-10-17 12:00', array(), $de),
+            array('von Samstag, 15. Oktober 2016 bis Montag, 17. Oktober 2016 um 12:00', '2016-10-15 12:00', '2016-10-17 00:00', array(), $de),
+            array('von Samstag, 15. Oktober 2016 bis Montag, 17. Oktober 2016 von 12:00 bis 13:00', '2016-10-15 12:00', '2016-10-17 13:00', array(), $de),
+            array('Montag, Donnerstag und Samstag, von Samstag, 15. Oktober 2016 bis Samstag, 29. Oktober 2016', '2016-10-15 00:00', '2016-10-29 00:00', array('Mon', 'Thu', 'Sat'), $de),
+            array('Montag, Donnerstag und Samstag um 12:00, von Samstag, 15. Oktober 2016 bis Samstag, 29. Oktober 2016', '2016-10-15 12:00', '2016-10-29 00:00', array('Mon', 'Thu', 'Sat'), $de),
+            array('Montag, Donnerstag und Samstag von 12:00 bis 13:00, von Samstag, 15. Oktober 2016 bis Samstag, 29. Oktober 2016', '2016-10-15 12:00', '2016-10-29 13:00', array('Mon', 'Thu', 'Sat'), $de),
         );
     }
 
