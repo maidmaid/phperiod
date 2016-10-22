@@ -71,12 +71,9 @@ Translated dates:
 $fr = new \IntlDateFormatter('fr');
 echo Phperiod::period('2016-10-15 12:00', '2016-10-29 13:00', ['Mon', 'Thu', 'Sat'], $fr);
 // lundi, jeudi et samedi de 12:00 à 13:00, du samedi 15 octobre 2016 au samedi 29 octobre 2016
-```
 
-Generic translated dates:
-
-```php
-// if special keywords don't have translation, they are remplaced by generic symbols ('from' and 'to' remplaced by '→'), like with Zulu locale
+// if special keywords don't have translation, they are remplaced by generic
+// symbols ('from' and 'to' remplaced by '→'), like with Zulu locale
 $zu = new \IntlDateFormatter('zu', \IntlDateFormatter::SHORT, \IntlDateFormatter::SHORT);
 // 10/15/16 → 10/17/16 12:00 Ntambama → 1:00 Ntambama
 ```
