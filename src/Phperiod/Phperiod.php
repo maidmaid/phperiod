@@ -99,9 +99,10 @@ class Phperiod
     protected static function translator()
     {
         if (null === static::$translator) {
-            static::$translator = new Translator('en');
+            static::$translator = $t = new Translator('generic');
             static::$translator->addLoader('array', new ArrayLoader());
-            static::setLocale('en');
+            static::$translator->setFallbackLocales(array('generic'));
+            static::setLocale('generic');
         }
 
         return static::$translator;
@@ -109,8 +110,9 @@ class Phperiod
 
     protected static function setLocale($locale)
     {
+        static::translator()->setLocale($locale);
+
         if (file_exists($filename = __DIR__.'/Lang/'.$locale.'.php')) {
-            static::translator()->setLocale($locale);
             $resource = require $filename;
             static::$translator->addResource('array', $resource['*'], $locale);
             static::$translator->addResource('array', $resource['time'], $locale, 'time');
@@ -158,32 +160,29 @@ class Phperiod
 
     protected static function formatRangedDate($start, $end)
     {
-        return sprintf(
-            '%s %s %s %s',
-            static::translator()->trans('from', array(), 'date'),
+        return trim(sprintf(
+            '%s%s %s %s',
+            ($from = static::translator()->trans('from', array(), 'date')) ? $from.' ' : '',
             static::formatDate($start),
             static::translator()->trans('to', array(), 'date'),
             static::formatDate($end)
-        );
+        ));
     }
 
     protected static function formatRangedTime($start, $end)
     {
-        return sprintf(
-            '%s %s %s %s',
-            static::translator()->trans('from', array(), 'time'),
+        return trim(sprintf(
+            '%s%s %s %s',
+            ($from = static::translator()->trans('from', array(), 'time')) ? $from.' ' : '',
             static::formatTime($start),
             static::translator()->trans('to', array(), 'time'),
             static::formatTime($end)
-        );
+        ));
     }
 
     protected static function formatDaysOfWeek($daysOfWeek)
     {
-        $daysOfWeek = array_map(function ($dayOfWeek) {
-            return static::formatDayOfWeek($dayOfWeek);
-        }, $daysOfWeek);
-
+        $daysOfWeek = array_map(function ($dayOfWeek) { return static::formatDayOfWeek($dayOfWeek); }, $daysOfWeek);
         $last = end($daysOfWeek);
         array_pop($daysOfWeek);
 
@@ -200,9 +199,9 @@ class Phperiod
         $time = $time ?: $date;
 
         return sprintf(
-            '%s %s %s',
+            '%s %s%s',
             static::formatDate($date),
-            static::translator()->trans('at', array(), 'time'),
+            ($at = static::translator()->trans('at', array(), 'time')) ? $at.' ' : '',
             static::formatTime($time)
         );
     }
@@ -219,8 +218,8 @@ class Phperiod
     protected static function formatRangedDateTime($start, $end)
     {
         return sprintf(
-            '%s %s %s %s',
-            static::translator()->trans('from', array(), 'date'),
+            '%s%s %s %s',
+            ($from = static::translator()->trans('from', array(), 'date')) ? $from.' ' : '',
             static::formatDate($start),
             static::translator()->trans('to', array(), 'date'),
             static::formatDateTime($end, $start)
@@ -230,8 +229,8 @@ class Phperiod
     protected static function formatRangedDateRangedTime($start, $end)
     {
         return sprintf(
-            '%s %s %s %s',
-            static::translator()->trans('from', array(), 'date'),
+            '%s%s %s %s',
+            ($from = static::translator()->trans('from', array(), 'date')) ? $from.' ' : '',
             static::formatDate($start),
             static::translator()->trans('to', array(), 'date'),
             static::formatDateRangedTime($start, $end)
@@ -250,9 +249,9 @@ class Phperiod
     protected static function formatRangedDateTimeWithDaysOfWeek($start, $end, $daysOfWeek)
     {
         return sprintf(
-            '%s %s %s, %s',
+            '%s %s%s, %s',
             static::formatDaysOfWeek($daysOfWeek),
-            static::translator()->trans('at', array(), 'time'),
+            ($at = static::translator()->trans('at', array(), 'time')) ? $at.' ' : '',
             static::formatTime($start),
             static::formatRangedDate($start, $end)
         );

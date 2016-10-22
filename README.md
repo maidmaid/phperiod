@@ -57,28 +57,28 @@ echo Phperiod::period('2016-10-15 12:00', '2016-10-29 13:00', ['Mon', 'Thu', 'Sa
 // Monday, Thursday and Saturday from 12:00 PM to 1:00 PM, from Saturday, October 15, 2016 to Saturday, October 29, 2016
 ```
 
-Translated dates:
-
-```php
-echo Phperiod::period(
-    '2016-10-15 12:00',
-    '2016-10-29 13:00',
-    ['Mon', 'Thu', 'Sat'],
-    new \IntlDateFormatter('fr')
-);
-// lundi, jeudi et samedi de 12:00 à 13:00, du samedi 15 octobre 2016 au samedi 29 octobre 2016
-```
-
 With custom format:
 
 ```php
-echo Phperiod::period(
-    '2016-10-15 12:00',
-    '2016-10-29 13:00',
-    ['Mon', 'Thu', 'Sat'],
-    new \IntlDateFormatter('en', \IntlDateFormatter::SHORT, \IntlDateFormatter::SHORT)
-);
+$formatter = new \IntlDateFormatter('en', \IntlDateFormatter::SHORT, \IntlDateFormatter::SHORT);
+echo Phperiod::period('2016-10-15 12:00', '2016-10-29 13:00', ['Mon', 'Thu', 'Sat'], $formatter);
 // Monday, Thursday and Saturday from 12:00 PM to 1:00 PM, from 10/15/16 to 10/29/16
+```
+
+Translated dates:
+
+```php
+$fr = new \IntlDateFormatter('fr');
+echo Phperiod::period('2016-10-15 12:00', '2016-10-29 13:00', ['Mon', 'Thu', 'Sat'], $fr);
+// lundi, jeudi et samedi de 12:00 à 13:00, du samedi 15 octobre 2016 au samedi 29 octobre 2016
+```
+
+Generic translated dates:
+
+```php
+// if special keywords don't have translation, they are remplaced by generic symbols ('from' and 'to' remplaced by '→'), like with Zulu locale
+$zu = new \IntlDateFormatter('zu', \IntlDateFormatter::SHORT, \IntlDateFormatter::SHORT);
+// 10/15/16 → 10/17/16 12:00 Ntambama → 1:00 Ntambama
 ```
 
 ## License

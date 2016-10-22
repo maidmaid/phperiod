@@ -27,6 +27,8 @@ class PhperiodTest extends \PHPUnit_Framework_TestCase
         $full = new \IntlDateFormatter('en', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL);
         $gmt0 = new \IntlDateFormatter('en', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, 'GMT+0');
         $trad = new \IntlDateFormatter('en', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, null, \IntlDateFormatter::TRADITIONAL);
+        // Zulu locale is used to call generic fallback locale
+        $generic = new \IntlDateFormatter('zu', \IntlDateFormatter::FULL, \IntlDateFormatter::SHORT);
         $en = new \IntlDateFormatter('en', \IntlDateFormatter::FULL, \IntlDateFormatter::SHORT);
         $fr = new \IntlDateFormatter('fr', \IntlDateFormatter::FULL, \IntlDateFormatter::SHORT);
         $de = new \IntlDateFormatter('de', \IntlDateFormatter::FULL, \IntlDateFormatter::SHORT);
@@ -39,6 +41,22 @@ class PhperiodTest extends \PHPUnit_Framework_TestCase
             array('from Saturday, October 15, 2016 to Monday, October 17, 2016 from 12:00:00 PM Central European Summer Time to 1:00:00 PM Central European Summer Time', '2016-10-15 12:00', '2016-10-17 13:00', array(), $full),
             array('from Saturday, October 15, 2016 to Monday, October 17, 2016 from 10:00:00 AM GMT to 11:00:00 AM GMT', '2016-10-15 12:00', '2016-10-17 13:00', array(), $gmt0),
             array('from Saturday, October 15, 2016 to Monday, October 17, 2016 from 12:00:00 PM Central European Summer Time to 1:00:00 PM Central European Summer Time', '2016-10-15 12:00', '2016-10-17 13:00', array(), $trad),
+
+            // Generic
+            array('Mgqibelo, Okthoba 15, 2016', '2016-10-15 00:00', null, array(), $generic),
+            array('Mgqibelo, Okthoba 15, 2016', '2016-10-15 00:00', '2016-10-15 00:00', array(), $generic),
+            array('Mgqibelo, Okthoba 15, 2016 12:00 Ntambama', '2016-10-15 12:00', null, array(), $generic),
+            array('Mgqibelo, Okthoba 15, 2016 12:00 Ntambama', '2016-10-15 12:00', '2016-10-15 12:00', array(), $generic),
+            array('Mgqibelo, Okthoba 15, 2016 12:00 Ntambama', '2016-10-15 12:00', '2016-10-15 00:00', array(), $generic),
+            array('Mgqibelo, Okthoba 15, 2016 12:00 Ekuseni → 1:00 Ntambama', '2016-10-15 00:00', '2016-10-15 13:00', array(), $generic),
+            array('Mgqibelo, Okthoba 15, 2016 12:00 Ntambama → 1:00 Ntambama', '2016-10-15 12:00', '2016-10-15 13:00', array(), $generic),
+            array('Mgqibelo, Okthoba 15, 2016 → Msombuluko, Okthoba 17, 2016', '2016-10-15 00:00', '2016-10-17 00:00', array(), $generic),
+            array('Mgqibelo, Okthoba 15, 2016 → Msombuluko, Okthoba 17, 2016 12:00 Ntambama', '2016-10-15 12:00', '2016-10-17 12:00', array(), $generic),
+            array('Mgqibelo, Okthoba 15, 2016 → Msombuluko, Okthoba 17, 2016 12:00 Ntambama', '2016-10-15 12:00', '2016-10-17 00:00', array(), $generic),
+            array('Mgqibelo, Okthoba 15, 2016 → Msombuluko, Okthoba 17, 2016 12:00 Ntambama → 1:00 Ntambama', '2016-10-15 12:00', '2016-10-17 13:00', array(), $generic),
+            array('Msombuluko, Lwesine + Mgqibelo, Mgqibelo, Okthoba 15, 2016 → Mgqibelo, Okthoba 29, 2016', '2016-10-15 00:00', '2016-10-29 00:00', array('Mon', 'Thu', 'Sat'), $generic),
+            array('Msombuluko, Lwesine + Mgqibelo 12:00 Ntambama, Mgqibelo, Okthoba 15, 2016 → Mgqibelo, Okthoba 29, 2016', '2016-10-15 12:00', '2016-10-29 00:00', array('Mon', 'Thu', 'Sat'), $generic),
+            array('Msombuluko, Lwesine + Mgqibelo 12:00 Ntambama → 1:00 Ntambama, Mgqibelo, Okthoba 15, 2016 → Mgqibelo, Okthoba 29, 2016', '2016-10-15 12:00', '2016-10-29 13:00', array('Mon', 'Thu', 'Sat'), $generic),
 
             // EN
             array('Saturday, October 15, 2016', '2016-10-15 00:00', null, array(), $en),

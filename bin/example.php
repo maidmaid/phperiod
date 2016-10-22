@@ -22,3 +22,4 @@ function example(IntlDateFormatter $formatter = null)
 example();
 example(new \IntlDateFormatter('fr', \IntlDateFormatter::FULL, \IntlDateFormatter::SHORT));
 example(new \IntlDateFormatter('en', \IntlDateFormatter::SHORT, \IntlDateFormatter::SHORT));
+example(new \IntlDateFormatter('zu', \IntlDateFormatter::SHORT, \IntlDateFormatter::SHORT));
