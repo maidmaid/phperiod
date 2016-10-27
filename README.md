@@ -75,7 +75,7 @@ echo Phperiod::period('2016-10-15 12:00', '2016-10-29 13:00', ['Mon', 'Thu', 'Sa
 // if special keywords don't have translation, they are remplaced by generic
 // symbols ('from' and 'to' remplaced by '→'), like with Zulu locale
 $zu = new \IntlDateFormatter('zu', \IntlDateFormatter::SHORT, \IntlDateFormatter::SHORT);
-echo Phperiod::period('2016-10-15 12:00', '2016-10-17 13:00', [], $fr);
+echo Phperiod::period('2016-10-15 12:00', '2016-10-17 13:00', [], $zu);
 // 10/15/16 → 10/17/16 12:00 Ntambama → 1:00 Ntambama
 ```
 
