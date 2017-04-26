@@ -1,4 +1,4 @@
-§<?php
+<?php
 
 return array(
     '*' => array(
